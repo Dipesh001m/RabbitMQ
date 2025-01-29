@@ -39,10 +39,6 @@ rabbitmq-cluster/
 - **Readiness Probe**: Ensures RabbitMQ is ready to accept traffic.
 - **Liveness Probe**: Restarts unhealthy nodes.
 
-### **Cluster Discovery**
-- Uses **DNS resolution** (`rabbitmq.default.svc.cluster.local`).
-- Environment variables enable auto-clustering.
-
 ## Services
 - **Internal Service**: Handles inter-node communication.
 - **Management UI**: Exposes RabbitMQ web UI (`http://<minikube-ip>:<port>`).
@@ -85,8 +81,6 @@ rabbitmq-cluster/
   ```
 
 ## Troubleshooting
-| Issue | Solution |
-|--------|
 | As a mention this application deployed on local machine using minikube cluster it is not able to access with default port because it doesnot expose nodeport service to machone directly Use `minikube service rabbitmq-management --url` |
 | Persistent storage issues | Check PVC status with `kubectl get pvc`. |
 | oR we can use `Loadbalancer instead of Nodeport`|
