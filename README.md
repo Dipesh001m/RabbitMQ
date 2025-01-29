@@ -13,12 +13,12 @@ This project deploys RabbitMQ in a **3-node clustered configuration** using **Ku
 The project is structured as follows:
 ```
 rabbitmq-cluster/
-├── templates/                   # Kubernetes manifest templates
-│   ├── statefulset.yaml         # StatefulSet definition
-│   ├── service.yaml             # Service definitions
-│   ├── management-service.yaml  # RabbitMQ configuration
-├── Chart.yaml                   # Helm chart metadata
-├── values.yaml                  # Configurable values
+├── templates/                   
+│   ├── statefulset.yaml         
+│   ├── service.yaml             
+│   ├── management-service.yaml  
+├── Chart.yaml                   
+├── values.yaml                  
      
 ```
 
