@@ -1,0 +1,95 @@
+# RabbitMQ Cluster Deployment on Kubernetes
+
+## Overview
+This project deploys RabbitMQ in a **3-node clustered configuration** using **Kubernetes StatefulSets**. The RabbitMQ nodes automatically discover each other, ensuring high availability and persistent storage using PVCs. The deployment is managed using **Helm** for easy customization and scalability.
+
+## Cluster Setup
+- Deploys RabbitMQ as a **StatefulSet** with **3 replicas**.
+- Uses **Persistent Volume Claims (PVCs)** for persistent storage.
+- Ensures automatic **cluster formation and state synchronization**.
+- Provides **high availability** with failure recovery mechanisms.
+
+## Helm Chart Structure
+The project is structured as follows:
+```
+rabbitmq-cluster/
+│── Chart.yaml         # Chart metadata
+│── values.yaml        # Configurable values
+│── templates/         # Kubernetes YAML templates
+          
+```
+
+## Production-Ready Configuration
+### **StatefulSet**
+- Ensures stable pod identities (`rabbitmq-0`, `rabbitmq-1`, `rabbitmq-2`).
+- Uses **PVCs** to persist RabbitMQ data across restarts.
+
+### **Persistence**
+- PVC ensures messages survive pod restarts.
+- Storage class can be customized in `values.yaml`.
+
+### **Replicas**
+- Default: **3 replicas** (Can be changed in `values.yaml`).
+- Pods automatically form a RabbitMQ cluster.
+
+### **Health Checks**
+- **Readiness Probe**: Ensures RabbitMQ is ready to accept traffic.
+- **Liveness Probe**: Restarts unhealthy nodes.
+
+### **Cluster Discovery**
+- Uses **DNS resolution** (`rabbitmq.default.svc.cluster.local`).
+- Environment variables enable auto-clustering.
+
+## Services
+- **Internal Service**: Handles inter-node communication.
+- **Management UI**: Exposes RabbitMQ web UI (`http://<minikube-ip>:<port>`).
+
+## Resource Requests & Limits
+- CPU & Memory limits are set in `values.yaml`.
+- Ensures stable performance and avoids resource exhaustion.
+
+
+## Scalability & Customization
+- **Scale cluster** by updating `replicaCount` in `values.yaml`.
+- Configurable **storage, resources, user credentials, and clustering settings**.
+
+## Deployment Steps
+1. **Install Helm (if not already installed)**
+   ```bash
+   curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+   ```
+2. **Deploy RabbitMQ using Helm**
+   ```
+   helm install rabbitmq-cluster ./helm-rabbitmq
+   ```
+3. **Verify deployment**
+   ```
+   kubectl get pods -l app=rabbitmq
+   ```
+4. **Access RabbitMQ UI**
+   ```
+   minikube service rabbitmq-management --url
+   ```
+
+## Scaling RabbitMQ Cluster
+- Update `values.yaml`:
+  ```
+  replicaCount: 5  # Scale up to 5 replicas
+  ```
+- Apply changes:
+  ```
+  helm upgrade rabbitmq-cluster .
+  ```
+
+## Troubleshooting
+| Issue | Solution |
+|--------|----------|
+| As a mention this application deployed on local machine using minikube cluster it is not able to access with default port because it doesnot expose nodeport service to machone directly  |
+| Management UI inaccessible | Use `minikube service rabbitmq-management --url`. |
+| Persistent storage issues | Check PVC status with `kubectl get pvc`. |
+| oR we can use `Loadbalancer instead of Nodeport`|
+| Also Access with `port forwarding`|
+
+## Conclusion
+This Helm chart provides a **scalable, highly available RabbitMQ cluster** with **persistent storage**, and **customizable configurations** for Kubernetes environments. 🚀
+
