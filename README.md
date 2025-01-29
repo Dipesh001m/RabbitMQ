@@ -13,10 +13,13 @@ This project deploys RabbitMQ in a **3-node clustered configuration** using **Ku
 The project is structured as follows:
 ```
 rabbitmq-cluster/
-│── Chart.yaml         # Chart metadata
-│── values.yaml        # Configurable values
-│── templates/         # Kubernetes YAML templates
-          
+├── templates/                   # Kubernetes manifest templates
+│   ├── statefulset.yaml         # StatefulSet definition
+│   ├── service.yaml             # Service definitions
+│   ├── management-service.yaml  # RabbitMQ configuration
+├── Chart.yaml                   # Helm chart metadata
+├── values.yaml                  # Configurable values
+     
 ```
 
 ## Production-Ready Configuration
@@ -83,9 +86,8 @@ rabbitmq-cluster/
 
 ## Troubleshooting
 | Issue | Solution |
-|--------|----------|
-| As a mention this application deployed on local machine using minikube cluster it is not able to access with default port because it doesnot expose nodeport service to machone directly  |
-| Management UI inaccessible | Use `minikube service rabbitmq-management --url`. |
+|--------|
+| As a mention this application deployed on local machine using minikube cluster it is not able to access with default port because it doesnot expose nodeport service to machone directly Use `minikube service rabbitmq-management --url` |
 | Persistent storage issues | Check PVC status with `kubectl get pvc`. |
 | oR we can use `Loadbalancer instead of Nodeport`|
 | Also Access with `port forwarding`|
