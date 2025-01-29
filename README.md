@@ -1,5 +1,13 @@
-# RabbitMQ Cluster Deployment on Kubernetes
+# RabbitMQ Cluster Deployment on Kubernetes using Helm
 
+## To Access the Application onyour Local you must have minikube installed on your Machine
+```
+minikube service rabbitmq-management --url 
+```
+## OR
+```
+minikube service rabbitmq-management
+```
 ## Overview
 This project deploys RabbitMQ in a **3-node clustered configuration** using **Kubernetes StatefulSets**. The RabbitMQ nodes automatically discover each other, ensuring high availability and persistent storage using PVCs. The deployment is managed using **Helm** for easy customization and scalability.
 
@@ -54,7 +62,7 @@ rabbitmq-cluster/
 
 ## Deployment Steps
 1. **Install Helm (if not already installed)**
-   ```bash
+   ```
    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
    ```
 2. **Deploy RabbitMQ using Helm**
