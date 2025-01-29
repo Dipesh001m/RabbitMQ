@@ -1,6 +1,9 @@
 # RabbitMQ Cluster Deployment on Kubernetes using Helm
 
 ## To Access the Application onyour Local you must have minikube installed on your Machine
+### Clone The Repo
+### Start minikube 
+### Run the Cmd 
 ```
 minikube service rabbitmq-management --url 
 ```
@@ -67,7 +70,7 @@ rabbitmq-cluster/
    ```
 2. **Deploy RabbitMQ using Helm**
    ```
-   helm install rabbitmq-cluster ./helm-rabbitmq
+   helm install rabbitmq-cluster .
    ```
 3. **Verify deployment**
    ```
@@ -93,7 +96,4 @@ rabbitmq-cluster/
 | Persistent storage issues | Check PVC status with `kubectl get pvc`. |
 | oR we can use `Loadbalancer instead of Nodeport`|
 | Also Access with `port forwarding`|
-
-## Conclusion
-This Helm chart provides a **scalable, highly available RabbitMQ cluster** with **persistent storage**, and **customizable configurations** for Kubernetes environments. 🚀
 
