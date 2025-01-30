@@ -3,6 +3,10 @@
 ## To Access the Application onyour Local you must have minikube installed on your Machine
 ### Clone The Repo
 ### Start minikube 
+### Install helm cluster
+```
+helm install rabbitmq-cluster .
+```
 ### Run the Cmd 
 ```
 minikube service rabbitmq-management --url 
